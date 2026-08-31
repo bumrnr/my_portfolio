@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이범국 | 포트폴리오 랜딩페이지 V2</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #f5f5f7;
+            --text-muted: #a1a1a6;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --grid-gap: 24px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Pretendard', sans-serif; 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 100px 0; }
+        h1, h2, h3, h4 { color: #ffffff; }
+        
+        h2.section-title { 
+            font-size: 2rem; 
+            margin-bottom: 50px; 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h2.section-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background-color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero { 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            background: radial-gradient(circle at 50% 50%, #1f2335 0%, #121212 100%); 
+        }
+        .hero-content { max-width: 800px; }
+        .hero-label {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(37, 99, 235, 0.2);
+            color: #60a5fa;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .hero h1 { 
+            font-size: 3.5rem; 
+            line-height: 1.3;
+            margin-bottom: 24px; 
+            letter-spacing: -0.02em;
+        }
+        .hero p.micro-copy { 
+            font-size: 1.25rem; 
+            color: #d1d5db; 
+            margin-bottom: 24px; 
+            max-width: 700px;
+            word-break: keep-all;
+        }
+        
+        /* Impact Tags */
+        .impact-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .impact-tag {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            color: #60a5fa;
+            font-weight: 500;
+        }
+
+        .cta-btn { 
+            display: inline-block;
+            padding: 16px 32px; 
+            background-color: var(--accent); 
+            color: #fff; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        .cta-btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--grid-gap); }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--grid-gap); }
+
+        /* Cards */
+        .card { 
+            background: var(--bg-card); 
+            border-radius: 12px; 
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover { border-color: #555; }
+        
+        /* Visual Proofs (Competencies) */
+        .visual-proof {
+            height: 160px;
+            background: #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            border-radius: 8px 8px 0 0;
+        }
+        .card-content { padding: 24px; flex-grow: 1; }
+        .card-content h3 { font-size: 1.2rem; margin-bottom: 12px; }
+        .card-content p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Project Cards */
+        .project-card { cursor: pointer; }
+        .project-card:hover { 
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .project-image {
+            height: 200px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1rem;
+            border-bottom: 1px solid #333;
+        }
+        .project-card .category {
+            font-size: 0.85rem;
+            color: #60a5fa;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .project-card h3 { font-size: 1.4rem; margin-bottom: 16px; }
+        
+        /* P-S-R Format */
+        .psr-format {
+            font-size: 0.9rem;
+            color: #d1d5db;
+            margin-bottom: 20px;
+        }
+        .psr-format div { margin-bottom: 6px; }
+        .psr-label { font-weight: 600; color: #a1a1a6; display: inline-block; width: 45px; }
+        
+        .tech-stack { 
+            margin-top: auto; 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+            padding-top: 16px;
+            border-top: 1px solid #333;
+        }
+        .tag { 
+            background: #2a2a2a; 
+            font-size: 0.8rem; 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            color: #d1d5db; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 1. Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <span class="hero-label">Scale & Impact</span>
+            <h1>비즈니스 모델 설계부터<br>데이터 자동화까지</h1>
+            <p class="micro-copy">딥테크·헬스케어 등 30여 개 스타트업의 성장을 이끌고, 데이터 워크플로우를 자동화해 낸 8년 차 PM입니다.</p>
+            
+            <div class="impact-tags">
+                <span class="impact-tag"># 30+ 프로젝트 총괄</span>
+                <span class="impact-tag"># Zero to One 기획</span>
+                <span class="impact-tag"># 업무 시간 획기적 단축</span>
+                <span class="impact-tag"># 성공적 투자 유치 (IR)</span>
+            </div>
+
+            <button class="cta-btn" onclick="document.getElementById('competencies').scrollIntoView({behavior: 'smooth'})">
+                시각적 포트폴리오 확인하기
+            </button>
+        </div>
+    </section>
+
+    <!-- 2. Core Competencies -->
+    <section id="competencies" style="background-color: #161616;">
+        <div class="container">
+            <h2 class="section-title">핵심 역량</h2>
+            <div class="grid-4">
+                <div class="card">
+                    <div class="visual-proof">
+                        [Python / Apps Script<br>자동화 콘솔 화면 GIF 삽입]
+                    </div>
+                    <div class="card-content">
+                        <h3>개발 & 자동화</h3>
+                        <p>단순 반복 업무를 없앱니다. RPA 도입 및 워크플로우 자동화를 통해 운영 효율을 극대화합니다.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="visual-proof">
+                        [Claude / Perplexity 도출<br>시장 분석 보고서 장표 삽입]
+                    </div>
+                    <div class="card-content">
+                        <h3>AI & 리서치</h3>
+                        <p>생성형 AI 프롬프트 엔지니어링을 활용해 데이터 기반의 심도 있는 리서치와 기획안을 도출합니다.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="visual-proof">
+                        [HEX 컬러/그리드 적용된<br>기획서 블러 썸네일 삽입]
+                    </div>
+                    <div class="card-content">
+                        <h3>문서 & 시각화</h3>
+                        <p>16:9 프레젠테이션 환경에 최적화된 정보 구조화 및 시각적 안정감으로 디테일을 증명합니다.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="visual-proof">
+                        [액셀러레이팅 프로그램<br>현장 또는 커뮤니케이션 캡처]
+                    </div>
+                    <div class="card-content">
+                        <h3>전략 기획 & PM</h3>
+                        <p>신규 사업 기획부터 MICE 행사 총괄까지, 복잡한 이해관계자를 조율하고 프로젝트를 완수합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Key Projects -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">주요 프로젝트</h2>
+            
+            <div class="grid-2">
+                <!-- Project 1 -->
+                <div class="card project-card">
+                    <div class="project-image">
+                        [위비즈웍스 UI/UX 프로토타입 목업 이미지]
+                    </div>
+                    <div class="card-content">
+                        <div class="category">SaaS 기획 & 데이터 연동</div>
+                        <h3>위비즈웍스 플랫폼 기획</h3>
+                        <div class="psr-format">
+                            <div><span class="psr-label">문제</span> 파편화된 MICE 데이터 및 수동 안내 업무의 비효율</div>
+                            <div><span class="psr-label">해결</span> SaaS 아키텍처 기획 및 문서 렌더링 RPA 기능 설계</div>
+                            <div><span class="psr-label">결과</span> 사용자 경험(UX) 개선 및 데이터 통합 관리 체계 구축</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tag">#SaaS기획</span>
+                            <span class="tag">#UX개선</span>
+                            <span class="tag">#MICE데이터</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="card project-card">
+                    <div class="project-image">
+                        [협력 공공기관 로고 모음 or 대규모 행사 현장 스케치]
+                    </div>
+                    <div class="card-content">
+                        <div class="category">거버넌스 구축 & 커뮤니케이션</div>
+                        <h3>공공/민간 창업 지원 총괄</h3>
+                        <div class="psr-format">
+                            <div><span class="psr-label">문제</span> 다수 이해관계자 및 복잡한 평가 일정 조율의 난항</div>
+                            <div><span class="psr-label">해결</span> 심사 프로세스 시스템화 및 커뮤니케이션 가이드라인 수립</div>
+                            <div><span class="psr-label">결과</span> 산림 공공데이터 대회 등 대규모 행사 성공적 총괄</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tag">#거버넌스</span>
+                            <span class="tag">#이해관계자소통</span>
+                            <span class="tag">#프로젝트총괄</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="card project-card">
+                    <div class="project-image">
+                        [성과 우상향 그래프 or 수치화된 인증 배지]
+                    </div>
+                    <div class="card-content">
+                        <div class="category">사업 모델 검증 & 수익화 전략</div>
+                        <h3>스타트업 IR 및 BM 컨설팅</h3>
+                        <div class="psr-format">
+                            <div><span class="psr-label">문제</span> 초기 스타트업의 수익 모델 부재 및 투자 설득력 부족</div>
+                            <div><span class="psr-label">해결</span> 특허 청구항 초안 작성 지원 및 맞춤형 IR 피칭덱 최적화</div>
+                            <div><span class="psr-label">결과</span> 딥테크/헬스케어 30여 개 기업 비즈니스 모델(BM) 검증 완료</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tag">#수익화전략</span>
+                            <span class="tag">#IR피칭</span>
+                            <span class="tag">#BM검증</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="card project-card">
+                    <div class="project-image">
+                        [캘린더봇 작동 화면 GIF or 최저가 알림 대시보드 캡처]
+                    </div>
+                    <div class="card-content">
+                        <div class="category">업무 효율화 & 자동화</div>
+                        <h3>업무 봇(Bot) 및 아키텍처 개발</h3>
+                        <div class="psr-format">
+                            <div><span class="psr-label">문제</span> 수작업 스케줄링 및 정보 모니터링에 따른 리소스 낭비</div>
+                            <div><span class="psr-label">해결</span> 자연어 처리 기반 캘린더봇 및 최저가 알림 아키텍처 구현</div>
+                            <div><span class="psr-label">결과</span> 운영 리소스 대폭 절감 및 실시간 데이터 트래킹 확보</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tag">#API연동</span>
+                            <span class="tag">#Python</span>
+                            <span class="tag">#효율화</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<button class="ai-chat-btn" onclick="toggleChat()" style="
+        position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+        border-radius: 50%; background: var(--accent); color: #fff; border: none;
+        font-size: 1.8rem; cursor: pointer; box-shadow: 0 8px 24px rgba(37,99,235,0.4);
+        display: flex; align-items: center; justify-content: center; z-index: 1000;
+    ">🤖</button>
+
+    <div id="aiChatBox" style="
+        display: none; position: fixed; bottom: 100px; right: 30px; width: 360px; height: 480px;
+        background: #1e1e1e; border: 1px solid #333; border-radius: 16px;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.8); z-index: 1000; flex-direction: column; overflow: hidden;
+    ">
+        <div style="background: #2563eb; color: #fff; padding: 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
+            <span>이범국 PM 포트폴리오 AI</span>
+            <span style="cursor:pointer;" onclick="toggleChat()">✕</span>
+        </div>
+        <div id="chatMessages" style="flex-grow: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem;">
+            <div style="background: #2a2a2a; color: #f5f5f7; padding: 10px 14px; border-radius: 12px; max-width: 80%; line-height: 1.4; align-self: flex-start;">
+                안녕하세요! 채용 담당자님. 이범국 님의 PM 경험이나 프로젝트에 대해 무엇이든 질문해 주세요.
+            </div>
+        </div>
+        <div style="display: flex; padding: 12px; border-top: 1px solid #333; background: #161616;">
+            <input type="text" id="userInput" placeholder="예: 주요 프로젝트 성과가 궁금해요." onkeypress="if(event.key==='Enter') sendMessage()" style="
+                flex-grow: 1; background: #2a2a2a; border: 1px solid #444; color: #fff; padding: 8px 12px; border-radius: 6px; outline: none;
+            ">
+            <button onclick="sendMessage()" style="
+                background: var(--accent); color: #fff; border: none; padding: 8px 14px; margin-left: 8px; border-radius: 6px; cursor: pointer;
+            ">전송</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. 비디오 소리 켜기/끄기
+        function toggleSound() {
+            const video = document.getElementById('songVideo');
+            const soundBtn = document.getElementById('soundBtn');
+            if (video && soundBtn) {
+                if (video.muted) {
+                    video.muted = false;
+                    soundBtn.innerText = '🔊 소리 끄기';
+                    soundBtn.style.backgroundColor = 'rgba(37, 99, 235, 0.8)';
+                } else {
+                    video.muted = true;
+                    soundBtn.innerText = '🔇 소리 켜기';
+                    soundBtn.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+                }
+            }
+        }
+
+        // 2. AI 챗봇 대화창 열기/닫기
+        function toggleChat() {
+            const chatBox = document.getElementById('aiChatBox');
+            chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // 3. AI API로 질문 전송
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const messagesDiv = document.getElementById('chatMessages');
+            
+            // 내 질문 말풍선
+            const userMsg = document.createElement('div');
+            userMsg.style.cssText = 'background: #2563eb; color: #fff; padding: 10px 14px; border-radius: 12px; max-width: 80%; line-height: 1.4; align-self: flex-end; word-break: break-all;';
+            userMsg.innerText = text;
+            messagesDiv.appendChild(userMsg);
+            input.value = '';
+
+            // AI 답변 대기 표시
+            const botMsg = document.createElement('div');
+            botMsg.style.cssText = 'background: #2a2a2a; color: #f5f5f7; padding: 10px 14px; border-radius: 12px; max-width: 80%; line-height: 1.4; align-self: flex-start;';
+            botMsg.innerText = '답변 작성 중...';
+            messagesDiv.appendChild(botMsg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await res.json();
+                botMsg.innerText = data.reply || '답변을 불러오지 못했습니다.';
+            } catch (err) {
+                botMsg.innerText = '네트워크 연결 중 오류가 발생했습니다.';
+            }
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+</body>
+</html>
